@@ -1,0 +1,17 @@
+# Ignore Ruby build artifacts and temp files
+*.gem
+*.rbc
+.bundle
+vendor/
+tmp/
+*.log
+
+# Ignore system files
+.DS_Store
+
+# Ignore editor configs
+.idea/
+.vscode/
+
+# Ignore config/env files
+.env
