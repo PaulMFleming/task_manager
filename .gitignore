@@ -5,6 +5,8 @@
 vendor/
 tmp/
 *.log
+.github/copilot-instructions.md
+.github/rspec-testing-patterns.md
 
 # Ignore system files
 .DS_Store

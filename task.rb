@@ -1,7 +1,7 @@
 require 'state_machines'
 
 class Task
-  attr_accesor: state,
+  attr_accessor :state, :title, :description, :due_date
 
   state_machine :state, initial: :pending do
 
@@ -18,7 +18,10 @@ class Task
     end
   end
 
-  def initialize
+  def initialize(title: nil, description: nil, due_date: nil)
+    @title = title
+    @description = description
+    @due_date = due_date
     super() # Initialize the state machine
   end
 end

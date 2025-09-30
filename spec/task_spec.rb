@@ -1,7 +1,15 @@
+require 'pry'
+require 'pry-byebug'
+require 'date'
 require_relative '../task'
 
 RSpec.describe Task do
-  subject { Task.new }
+  subject { Task.new(
+    title: 'Test Task', 
+    description: 'A test task', 
+    due_date: Date.today - 1
+    ) 
+  }
 
   it 'has initial state pending' do
     expect(subject.state).to eq('pending')
@@ -23,5 +31,11 @@ RSpec.describe Task do
     subject.complete
     subject.archive
     expect(subject.state).to eq('archived')
+  end
+
+  describe 'attributes' do
+   it 'has a title' do
+     expect(subject.title).to eq('Test Task')
+   end
   end
 end
