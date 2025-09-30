@@ -4,12 +4,15 @@ require 'date'
 require_relative '../task'
 
 RSpec.describe Task do
+  let(:title) { 'Test Task' }
+  let(:description) { 'A test task' }
+  let(:due_date) { Date.today - 1 }
+
   subject { Task.new(
-    title: 'Test Task', 
-    description: 'A test task', 
-    due_date: Date.today - 1
-    ) 
-  }
+    title: title,
+    description: description,
+    due_date: due_date
+  ) }
 
   it 'has initial state pending' do
     expect(subject.state).to eq('pending')
@@ -37,5 +40,32 @@ RSpec.describe Task do
    it 'has a title' do
      expect(subject.title).to eq('Test Task')
    end
+
+    it 'has a description' do
+      expect(subject.description).to eq('A test task')
+    end
+
+    it 'has a due date' do
+      expect(subject.due_date).to eq(Date.today - 1)
+    end
+  end
+
+  describe '#overdue?' do
+    it 'returns true if current task is after due date' do
+      expect(subject.overdue?).to be true
+    end
+
+    it 'returns false if current task is before or on due date' do
+      subject.due_date = Date.today + 1
+      expect(subject.overdue?).to be false
+
+      subject.due_date = Date.today
+      expect(subject.overdue?).to be false
+    end
+
+    it 'returns false if no due date is set' do
+      subject.due_date = nil
+      expect(subject.overdue?).to be false  
+    end
   end
 end
