@@ -18,6 +18,11 @@ class Task
     end
   end
 
+  def overdue?
+    return false if due_date.nil?
+    due_date < Date.today
+  end
+
   def initialize(title: nil, description: nil, due_date: nil)
     @title = title
     @description = description
