@@ -51,21 +51,28 @@ RSpec.describe Task do
   end
 
   describe '#overdue?' do
-    it 'returns true if current task is after due date' do
-      expect(subject.overdue?).to be true
+    context 'when due_date is in the past' do
+      let(:due_date) { Date.today - 1 }
+      
+      it 'returns true' do
+        expect(subject.overdue?).to be true
+      end
     end
 
-    it 'returns false if current task is before or on due date' do
-      subject.due_date = Date.today + 1
-      expect(subject.overdue?).to be false
+    context 'when due_date is today or in the future' do
+      let(:due_date) { Date.today }
 
-      subject.due_date = Date.today
-      expect(subject.overdue?).to be false
+      it 'returns false' do
+        expect(subject.overdue?).to be false
+      end
     end
 
-    it 'returns false if no due date is set' do
-      subject.due_date = nil
-      expect(subject.overdue?).to be false  
+    context 'when no due date is set' do
+      let(:due_date) { nil }
+
+      it 'returns false' do
+        expect(subject.overdue?).to be false
+      end
     end
   end
 end
