@@ -27,7 +27,25 @@ RSpec.describe TaskList do
   end
 
   it 'returns overdue tasks' do
-    #binding.pry
     expect(subject.overdue).to eq([task1])
   end
+
+  describe '#complete_all_pending' do
+    it 'completes all pending tasks' do
+      #binding.pry
+      subject.complete_all_pending
+      
+      expect(subject.all.select { 
+        |t| t.state == 'completed' }
+        .size).to be > 0
+    end
+  end
+
+  # describe '#by_state' do
+  #   it 'returns tasks in a specific state' do
+  #     task = Task.new(title: 'To Do')
+  #     subject.add(task)
+  #     expect(subject.by_state('pending').to include(task))
+  #   end
+  # end
 end

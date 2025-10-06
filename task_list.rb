@@ -16,4 +16,13 @@ class TaskList
   def overdue
     @tasks.select { |task| task.overdue? }
   end
+
+  def complete_all_pending
+    @tasks.each do |t|
+      if t.state == 'pending'
+        t.start
+        t.complete
+      end
+    end
+  end
 end
