@@ -25,4 +25,8 @@ class TaskList
       end
     end
   end
+
+  def by_state(state)
+    @tasks.select { |task| task.state == state }
+  end
 end

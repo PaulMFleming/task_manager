@@ -32,7 +32,6 @@ RSpec.describe TaskList do
 
   describe '#complete_all_pending' do
     it 'completes all pending tasks' do
-      #binding.pry
       subject.complete_all_pending
       
       expect(subject.all.select { 
@@ -41,11 +40,11 @@ RSpec.describe TaskList do
     end
   end
 
-  # describe '#by_state' do
-  #   it 'returns tasks in a specific state' do
-  #     task = Task.new(title: 'To Do')
-  #     subject.add(task)
-  #     expect(subject.by_state('pending').to include(task))
-  #   end
-  # end
+  describe '#by_state' do
+    it 'returns tasks in a specific state' do
+      task = Task.new(title: 'To Do')
+      subject.add(task)
+      expect(subject.by_state('pending')).to include(task)
+    end
+  end
 end
