@@ -1,10 +1,11 @@
 require 'date'
+require 'pry-byebug'
 require_relative '../task'
-require_relative './task_list'
+require_relative '../task_list'
 
 RSpec.describe TaskList do
-  let(:task1) { Task.new(title: 'Task 1', due_date: Date.today -2)}
-  let(:task2) { Task.new(title: 'Task 2', due_date: Date.today +1)}
+  let(:task1) { Task.new(title: 'Task 1', due_date: (Date.today - 1))}
+  let(:task2) { Task.new(title: 'Task 2', due_date: (Date.today + 1))}
   let(:task3) { Task.new(title: 'Task 3', due_date: nil)}
   subject { TaskList.new([task1, task2, task3]) }
 
@@ -26,6 +27,7 @@ RSpec.describe TaskList do
   end
 
   it 'returns overdue tasks' do
+    #binding.pry
     expect(subject.overdue).to eq([task1])
   end
 end
