@@ -15,9 +15,11 @@ Rspec.describe TaskProcessor do
       subject.process_all
       expect(list.by_state('inprogress').size).to eq(2)
     end
+  end
 
-    it 'can complete all in-progress tasks' do
-      list.complete_all_pending
+  describe '#complete_all' do
+    it 'completes all in-progress tasks' do
+      list.by_state('pending').each(&:start)
       subject.complete_all
       expect(list.by_state('completed').size).to eq(2)
     end
