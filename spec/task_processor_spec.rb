@@ -3,7 +3,7 @@ require_relative '../task'
 require_relative '../task_list'
 require_relative '../task_processor'
 
-Rspec.describe TaskProcessor do
+RSpec.describe TaskProcessor do
   let(:task1) { Task.new(title: 'Build feature') }
   let(:task2) { Task.new(title: 'Write tests') }
   let(:list) { TaskList.new([task1, task2]) }
@@ -12,7 +12,9 @@ Rspec.describe TaskProcessor do
 
   describe '#process_all' do
     it 'starts all pending tasks and marks them as in progress' do
+      #binding.irb
       subject.process_all
+      
       expect(list.by_state('inprogress').size).to eq(2)
     end
   end
