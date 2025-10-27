@@ -4,7 +4,6 @@ class Task
   attr_accessor :state, :title, :description, :due_date
 
   state_machine :state, initial: :pending do
-
     event :start do
       transition pending: :inprogress
     end
