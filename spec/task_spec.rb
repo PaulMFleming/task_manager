@@ -78,7 +78,6 @@ RSpec.describe Task do
 
   describe 'archive state transitions' do
     it 'transitions from completed to archived on archive' do
-      #binding.irb
       subject.start
       subject.complete
       subject.archive
@@ -92,6 +91,31 @@ RSpec.describe Task do
     it 'cannot archive an inprogress task' do
       subject.start
       expect { subject.archive! }.to raise_error(StateMachines::InvalidTransition)
+    end
+  end
+
+  describe 'state machine callbacks' do
+    describe 'timestamps' do
+      it 'sets started_at when task is started' do
+        expect(subject.started_at).to be nil
+        subject.start
+        expect(subject.started_at).to be_within(1.second).of(Time.now)
+      end
+
+      it 'sets completed_at when task is completed' do
+        subject.start
+        expect(subject.complete_at).to be nil
+        subject.complete
+        expect(subject.completed_at). to be_within(1.second).of(Time.now)
+      end
+
+      it 'sets archived_at when task is archived' do
+        subject.start
+        subject.complete
+        expect(subject.archived_at).to be nil
+        subject.archive
+        expect(subject.archived_at).to be_within(1.second).of(Time.now)
+      end
     end
   end
 end
