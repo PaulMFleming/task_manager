@@ -1,9 +1,13 @@
 require 'state_machines'
 
 class Task
-  attr_accessor :state, :title, :description, :due_date
+  attr_accessor :state, :title, :description, :due_date, :started_at, :completed_at, :archived_at
 
   state_machine :state, initial: :pending do
+    after_transition pending: :inprogress, do: :set_started_at
+    after_transition inprogress: :completed, do: :set_completed_at
+    after_transition completed: :archived, do: :set_archived_at
+
     event :start do
       transition pending: :inprogress
     end
@@ -26,7 +30,22 @@ class Task
     @title = title
     @description = description
     @due_date = due_date
+    @started_at = nil
+    @completed_at = nil
+    @archived_at = nil
     super() # Initialize the state machine
+  end
+
+  def set_started_at
+    @started_at = Time.now
+  end
+
+  def set_completed_at
+    @completed_at = Time.now
+  end
+
+  def set_archived_at
+    @archived_at = Time.now
   end
 end
 

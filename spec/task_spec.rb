@@ -99,14 +99,14 @@ RSpec.describe Task do
       it 'sets started_at when task is started' do
         expect(subject.started_at).to be nil
         subject.start
-        expect(subject.started_at).to be_within(1.second).of(Time.now)
+        expect(subject.started_at).to be_within(1).of(Time.now)
       end
 
       it 'sets completed_at when task is completed' do
         subject.start
-        expect(subject.complete_at).to be nil
+        expect(subject.completed_at).to be nil
         subject.complete
-        expect(subject.completed_at). to be_within(1.second).of(Time.now)
+        expect(subject.completed_at). to be_within(1).of(Time.now)
       end
 
       it 'sets archived_at when task is archived' do
@@ -114,7 +114,7 @@ RSpec.describe Task do
         subject.complete
         expect(subject.archived_at).to be nil
         subject.archive
-        expect(subject.archived_at).to be_within(1.second).of(Time.now)
+        expect(subject.archived_at).to be_within(1).of(Time.now)
       end
     end
   end
