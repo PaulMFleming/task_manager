@@ -75,4 +75,21 @@ RSpec.describe Task do
       end
     end
   end
+
+  describe 'archive state transitions' do
+    it 'transitions from completed to archived on archive' do
+      subject.start
+      subject.complete
+      subject.archive
+      expect(subject.state).to eq('archived')
+    end
+
+    it 'cannot archive a pending task' do
+      expect { subject.archive }.to raise_error(StateMachines::InvalidTransition)
+    end
+
+    it 'cannot archive an inprogress task' do
+      subject.start
+      expect { subject.archive }.to raise_error(StateMachines::InvalidTransition)
+  end
 end

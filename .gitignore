@@ -7,6 +7,8 @@ tmp/
 *.log
 .github/copilot-instructions.md
 .github/rspec-testing-patterns.md
+.github/my-learnng-path.md
+
 
 # Ignore system files
 .DS_Store
