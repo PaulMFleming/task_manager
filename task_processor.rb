@@ -14,7 +14,9 @@ class TaskProcessor
     end
   end
 
-  # def complete_all
-
-  # end
+  def complete_all
+    @list.by_state('inprogress').each do |task|
+      task.complete
+    end
+  end
 end

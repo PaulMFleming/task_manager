@@ -12,7 +12,6 @@ RSpec.describe TaskProcessor do
 
   describe '#process_all' do
     it 'starts all pending tasks and marks them as in progress' do
-      #binding.irb
       subject.process_all
       
       expect(list.by_state('inprogress').size).to eq(2)
@@ -20,8 +19,11 @@ RSpec.describe TaskProcessor do
   end
 
   describe '#complete_all' do
+    before do
+      subject.process_all
+    end
+
     it 'completes all in-progress tasks' do
-      list.by_state('pending').each(&:start)
       subject.complete_all
       expect(list.by_state('completed').size).to eq(2)
     end
